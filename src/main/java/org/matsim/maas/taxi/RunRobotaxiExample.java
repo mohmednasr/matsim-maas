@@ -35,7 +35,7 @@ import org.matsim.vis.otfvis.OTFVisConfigGroup;
  * {@link org.matsim.contrib.av.robotaxi.vehicles.CreateTaxiVehicles}
  */
 public class RunRobotaxiExample {
-	public static final String CONFIG_FILE = "scenarios/cottbus/robotaxi_config.xml";
+	public static final String CONFIG_FILE = "scenarios/cottbusdouai/robotaxi_config.xml";
 
 	public static void main(String[] args) {
 		RunRobotaxiExample.run(CONFIG_FILE, false, 10);

@@ -19,12 +19,15 @@
 
 package org.matsim.maas.drt;
 
+import org.matsim.api.core.v01.Scenario;
 import org.matsim.contrib.drt.run.DrtControlerCreator;
 import org.matsim.contrib.drt.run.MultiModeDrtConfigGroup;
 import org.matsim.contrib.dvrp.run.DvrpConfigGroup;
+import org.matsim.contrib.otfvis.OTFVisLiveModule;
 import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.controler.Controler;
+import org.matsim.core.scenario.ScenarioUtils;
 import org.matsim.vis.otfvis.OTFVisConfigGroup;
 
 /**
@@ -36,14 +39,19 @@ import org.matsim.vis.otfvis.OTFVisConfigGroup;
  */
 public class RunDoorToDoorDrtExample {
 
-	private static final String COTTBUS_DOOR2DOOR_CONFIG = "scenarios/cottbus/drtconfig_door2door.xml";
+	private static final String COTTBUS_DOOR2DOOR_CONFIG = "scenarios/cottbusdouai/drtconfig_door2door.xml";
 
 	@SuppressWarnings("unused")
-	private static final String MIELEC_CONFIG = "scenarios/mielec_2014_02/mielec_drt_config.xml";
+//	private static final String MIELEC_CONFIG = "scenarios/mielec_2014_02/mielec_drt_config.xml";
 
 	public static void run(Config config, boolean otfvis) {
 		//Creates a MATSim Controler and preloads all DRT related packages
 		Controler controler = DrtControlerCreator.createControler(config, otfvis);
+
+//		OTFVisConfigGroup otfVisConfigGroup = ConfigUtils.addOrGetModule( config, OTFVisConfigGroup.class );
+//		otfVisConfigGroup.setLinkWidth( 5 );
+//		otfVisConfigGroup.setDrawNonMovingItems( true );
+//		controler.addOverridingModule(new OTFVisLiveModule());
 
 		//starts the simulation
 		controler.run();
@@ -52,6 +60,10 @@ public class RunDoorToDoorDrtExample {
 	public static void main(String[] args) {
 		Config config = ConfigUtils.loadConfig(COTTBUS_DOOR2DOOR_CONFIG, new MultiModeDrtConfigGroup(),
 				new DvrpConfigGroup(), new OTFVisConfigGroup());
+		config.controller().setLastIteration(5);
+
+
+
 		run(config, false);
 	}
 }
